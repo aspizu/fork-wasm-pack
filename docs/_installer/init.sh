@@ -12,6 +12,10 @@
 # This is just a little script that can be downloaded from the internet to
 # install wasm-pack. It just does platform detection, downloads the installer
 # and runs it.
+if [ -z "$BASH_VERSION" ]; then
+    curl https://drager.github.io/wasm-pack/installer/init.sh -sSf | bash
+    exit "$?"
+fi
 
 set -u
 
