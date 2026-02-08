@@ -39,6 +39,11 @@ if [ -z "${VERSION:-}" ]; then
     fi
 fi
 
+err() {
+    say "$1" >&2
+    exit 1
+}
+
 # Resolve "latest" to actual version number
 if [ "$VERSION" = "latest" ]; then
     VERSION=$(curl -s https://api.github.com/repos/drager/wasm-pack/releases/latest | grep '"tag_name"' | sed -E 's/.*"v?([^"]+)".*/\1/')
@@ -185,11 +190,6 @@ get_architecture() {
 
 say() {
     echo "wasm-pack-init: $1"
-}
-
-err() {
-    say "$1" >&2
-    exit 1
 }
 
 need_cmd() {
